@@ -3,6 +3,8 @@
 ```shell
 python setup.py bdist_wheel --universal
 twine upload dist/*
+
+pip install xh_utils -i https://www.pypi.org/simple/
 ```
 
 1. 彩色日志
