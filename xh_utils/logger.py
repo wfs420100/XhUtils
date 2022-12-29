@@ -220,9 +220,9 @@ class _ConfigLogger(object):
         "NOTSET": logging.NOTSET,
     }
 
-    STDOUT_TEXT_FMT = "%(log_color)s[%(asctime)s] [%(name)s] [%(levelname)s] [%(threadName)s] [%(filename)s:%(lineno)d] %(message)s"
+    STDOUT_TEXT_FMT = "%(log_color)s[%(asctime)s] [%(name)s] [%(levelname)8s] [%(threadName)s] [%(filename)s:%(lineno)d] %(message)s"
     STDOUT_DATE_FMT = "%m-%d-%Y %H:%M:%S"
-    FILE_TEXT_FMT = "[%(asctime)s] [%(name)s] [%(levelname)s] [%(threadName)s] [%(filename)s:%(lineno)d] %(message)s"
+    FILE_TEXT_FMT = "[%(asctime)s] [%(name)s] [%(levelname)s] [%(threadName)8s] [%(filename)s:%(lineno)d] %(message)s"
     FILE_DATE_FMT = "%m-%d-%Y %H:%M:%S"
 
 
@@ -269,6 +269,10 @@ class Logger(object):
     @staticmethod
     def error(msg):
         Logger.logger.error(msg)
+
+    @staticmethod
+    def critical(msg):
+        Logger.logger.critical(msg)
 
 
 def starting():
