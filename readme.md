@@ -17,6 +17,7 @@ pip install xh_utils -i https://www.pypi.org/simple/
 from xh_utils.logger import Logger as logger
 
 logger.init_logger()
+# logger.init_logger(log_pathdir="./log/",is_split_logfile=True) # 日志同步写入文件，并按天进行文件分割写入
 logger.debug("debug")
 logger.info("info")
 logger.warning("warning")
