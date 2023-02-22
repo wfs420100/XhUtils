@@ -229,10 +229,8 @@ class _ConfigLogger(object):
 class Logger(object):
     author_name, level_name = "wfs420100", "DEBUG"
     level = _ConfigLogger.LEVEL_LOGGING_MAP[level_name.upper()]
-
     logger = logging.getLogger(name=author_name)
     logger.setLevel(level)
-
     console_handler = logging.StreamHandler()
     console_handler.setLevel(level)
     console_handler.setFormatter(_ColorFormatter(fmt=_ConfigLogger.STDOUT_TEXT_FMT, datefmt=_ConfigLogger.STDOUT_DATE_FMT))
@@ -241,14 +239,16 @@ class Logger(object):
     @classmethod
     def init_logger(cls, log_pathdir="", log_filename="", is_split_logfile=False, author_name="wfs420100", level_name="DEBUG"):
         level = _ConfigLogger.LEVEL_LOGGING_MAP[level_name.upper()]
-
-        cls.logger = logging.getLogger(name=author_name)
+        cls.logger = logging.Logger(name=author_name)
         cls.logger.setLevel(level)
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(level)
+        console_handler.setFormatter(_ColorFormatter(fmt=_ConfigLogger.STDOUT_TEXT_FMT, datefmt=_ConfigLogger.STDOUT_DATE_FMT))
+        cls.logger.addHandler(console_handler)
 
         if "" != log_pathdir:
             os.makedirs(log_pathdir, exist_ok=True)
             if "" == log_filename: log_filename = f"log_{time.strftime('%Y%m%d_%H', time.localtime())}.log"
-
             file_handler = _ConcurrentTimedRotatingFileHandler(log_pathdir, log_filename) if is_split_logfile else logging.FileHandler(os.path.join(log_pathdir, log_filename), encoding="utf8")
             file_handler.setLevel(level)
             file_handler.setFormatter(logging.Formatter(fmt=_ConfigLogger.FILE_TEXT_FMT, datefmt=_ConfigLogger.FILE_DATE_FMT))
@@ -276,10 +276,10 @@ class Logger(object):
 
 
 def starting():
-    Logger.init_logger()
     Logger.debug("debug")
-    Logger.info("info")
     Logger.warning("warning")
+    Logger.init_logger()
+    Logger.info("info")
     Logger.error("error")
 
 
