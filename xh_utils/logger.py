@@ -1,4 +1,4 @@
-# wfs420100--2022/12/29
+# xh--2022/12/29
 import os
 import abc
 import re
@@ -227,7 +227,7 @@ class _ConfigLogger(object):
 
 
 class Logger(object):
-    author_name, level_name = "wfs420100", "DEBUG"
+    author_name, level_name = "xh", "DEBUG"
     level = _ConfigLogger.LEVEL_LOGGING_MAP[level_name.upper()]
     logger = logging.getLogger(name=author_name)
     logger.setLevel(level)
@@ -237,7 +237,7 @@ class Logger(object):
     logger.addHandler(console_handler)
 
     @classmethod
-    def init_logger(cls, log_pathdir="", log_filename="", is_split_logfile=False, author_name="wfs420100", level_name="DEBUG"):
+    def init_logger(cls, log_pathdir="", log_filename="", is_split_logfile=False, author_name="xh", level_name="DEBUG"):
         level = _ConfigLogger.LEVEL_LOGGING_MAP[level_name.upper()]
         cls.logger = logging.Logger(name=author_name)
         cls.logger.setLevel(level)
